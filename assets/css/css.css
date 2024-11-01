@@ -539,6 +539,10 @@ input {
 }
 
 .project__item {
+    margin: 20px; /* Adjust the value as needed */
+}
+
+.project__item {
     grid-template-columns: 5fr 7fr;
 }
 
