@@ -389,11 +389,12 @@ function animateHomeSection() {
         homeElements.list.style.animation = 'fadeInStagger 0.8s ease forwards 0.6s';
     }
 
-    // Animate social links with staggered delay
-    homeElements.socialLinks.forEach((link, index) => {
+    // Reset and animate social links
+    const socialLinks = document.querySelectorAll('.home__social-link');
+    socialLinks.forEach((link, index) => {
         link.style.animation = 'none';
-        link.offsetHeight;
-        link.style.animation = `fadeInUp 0.5s ease forwards ${0.9 + (index * 0.2)}s`;
+        link.offsetHeight; // Trigger reflow
+        link.style.animation = `socialFadeIn 0.5s ease forwards ${0.9 + (index * 0.2)}s`;
     });
 }
 
