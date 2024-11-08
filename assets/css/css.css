@@ -536,25 +536,32 @@ input {
 
 .project__container {
     row-gap: 2.5rem;
+    -webkit-box-sizing: border-box;
+    -webkit-overflow-scrolling: touch;
 }
 
 .project__item {
-    margin: 20px; /* Adjust the value as needed */
-}
-
-.project__item {
+    display: grid;
     grid-template-columns: 5fr 7fr;
+    margin: 20px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 .project__img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    will-change: transform;
 }
 
 .project__data {
     padding: 3rem 3rem 2.5rem 1.875rem;
     border: 1px solid var(--border-color);
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 .project__title {
@@ -1258,60 +1265,17 @@ transition: background-color 0.3s, color 0.3s;
     color: #fff;
 }
 
-
- /* new once */
-.project__categorise {
-    display: flex;
-    flex-wrap: wrap;
-    column-gap: 3rem;
-    row-gap: 0.25rem;
-    margin-bottom: 1.875rem;
-    -webkit-overflow-scrolling: touch;
-    -webkit-tap-highlight-color: transparent; /* Remove tap highlight on iOS */
+@supports (-webkit-touch-callout: none) {
+    .project__container {
+        display: grid;
+        gap: 2.5rem;
+    }
+    
+    .project__item {
+        display: grid;
+        gap: 1rem;
+    }
 }
 
-.category__btn {
-    color: var(--text-color-alt);
-    font-weight: var(--bold);
-    font-family: var(--mono-font);
-    position: relative;
-    padding: 0.5rem 0; /* Add padding for better touch target */
-    cursor: pointer;
-    -webkit-touch-callout: none; /* Prevent callout on long press */
-    -webkit-user-select: none; /* Prevent text selection */
-    user-select: none;
-}
-
-
-.project__container {
-    row-gap: 2.5rem;
-    -webkit-overflow-scrolling: touch; /* Enable smooth scrolling on iOS */
-    overflow-x: hidden; /* Prevent horizontal scrolling */
-}
-
-.project__item {
-    margin: 20px;
-    -webkit-tap-highlight-color: transparent; /* Remove tap highlight on iOS */
-    touch-action: manipulation; /* Optimize touch interactions */
-}
-
-.project__item {
-    grid-template-columns: 5fr 7fr;
-    -webkit-transform: translateZ(0); /* Enable hardware acceleration */
-    transform: translateZ(0);
-}
-
-.project__img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    -webkit-user-drag: none; /* Prevent image dragging on iOS */
-}
-
-.project__data {
-    padding: 3rem 3rem 2.5rem 1.875rem;
-    border: 1px solid var(--border-color);
-    -webkit-overflow-scrolling: touch; /* Enable smooth scrolling for content */
-}
 
 
