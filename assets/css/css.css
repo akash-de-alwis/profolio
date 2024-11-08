@@ -536,45 +536,24 @@ input {
 
 .project__container {
     row-gap: 2.5rem;
-    display: flex;
-    flex-direction: column;
-    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+    padding: 0 10px;
 }
 
 .project__item {
-    margin: 20px;
-    display: grid;
     grid-template-columns: 5fr 7fr;
-    background: #fff; /* Ensure solid background */
-    -webkit-transform: translateZ(0); /* Prevent iOS rendering issues */
-    transform: translateZ(0);
-    will-change: transform; /* Optimize animations */
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
 }
 
 .project__img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    -webkit-backface-visibility: hidden; /* Prevent image flickering */
-    backface-visibility: hidden;
 }
 
 .project__data {
     padding: 3rem 3rem 2.5rem 1.875rem;
     border: 1px solid var(--border-color);
-    -webkit-overflow-scrolling: touch; /* Smooth scrolling for content */
-}
-
-/* Add iOS-specific media query */
-@supports (-webkit-touch-callout: none) {
-    .project__container {
-        gap: 2.5rem; /* Fallback for iOS */
-    }
-    
-    .project__item {
-        margin: 0 auto 20px auto; /* Better margin handling for iOS */
-        width: calc(100% - 40px); /* Account for margins */
-    }
 }
 
 .project__title {
@@ -1172,6 +1151,22 @@ figcaption {
 
     .blog__details {
         padding: 2.5rem 1.875rem;
+    }
+
+    .project__item {
+        grid-template-columns: 1fr;
+        margin: 10px 0;
+    }
+
+    .project__data {
+        padding: 1.5rem;
+    }
+
+    .project__img {
+        width: 100%;
+        height: auto;
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
     }
 }
 
