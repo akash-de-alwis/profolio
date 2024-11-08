@@ -536,32 +536,33 @@ input {
 
 .project__container {
     row-gap: 2.5rem;
-    -webkit-box-sizing: border-box;
-    -webkit-overflow-scrolling: touch;
+    display: flex;
+    flex-direction: column;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
 }
 
 .project__item {
     display: grid;
     grid-template-columns: 5fr 7fr;
-    margin: 20px;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
+    margin: 20px 0;
+    -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.14);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.14);
 }
 
 .project__img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0);
-    will-change: transform;
+    -webkit-object-fit: cover;
 }
 
 .project__data {
     padding: 3rem 3rem 2.5rem 1.875rem;
     border: 1px solid var(--border-color);
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
 }
 
 .project__title {
@@ -1263,18 +1264,6 @@ transition: background-color 0.3s, color 0.3s;
 .notice-button:hover {
     background-color: var(--primary-color);  
     color: #fff;
-}
-
-@supports (-webkit-touch-callout: none) {
-    .project__container {
-        display: grid;
-        gap: 2.5rem;
-    }
-    
-    .project__item {
-        display: grid;
-        gap: 1rem;
-    }
 }
 
 
