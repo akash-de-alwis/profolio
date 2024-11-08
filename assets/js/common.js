@@ -157,5 +157,53 @@ if (portfolioLink) {
     });
 }
 
+/*========== Resume Animation ==========*/
+function animateResume() {
+    const resumeItems = document.querySelectorAll('.resume__item');
+    
+    // Reset animations by removing and re-adding items
+    resumeItems.forEach(item => {
+        item.style.animation = 'none';
+        item.offsetHeight; // Trigger reflow
+        item.style.animation = 'slideInResume 0.8s ease forwards'; // Increased duration from 0.5s to 0.8s
+    });
+
+    // Add longer sequential delay for each item
+    resumeItems.forEach((item, index) => {
+        item.style.animationDelay = `${index * 0.4}s`; // Increased delay from 0.2s to 0.4s
+    });
+}
+
+// Initialize resume animation when clicking on Resume nav link
+const resumeLink = document.querySelector('a[href="#resume"]');
+if (resumeLink) {
+    resumeLink.addEventListener('click', () => {
+        setTimeout(animateResume, 300); // Increased delay from 100ms to 300ms
+    });
+}
+
+// Also trigger animation when the section becomes visible
+function setupResumeObserver() {
+    const resumeSection = document.getElementById('resume');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                animateResume();
+                observer.disconnect(); // Only trigger once
+            }
+        });
+    }, { threshold: 0.5 });
+
+    if (resumeSection) {
+        observer.observe(resumeSection);
+    }
+}
+
+// Initialize observers when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    setupResumeObserver();
+    // ... your other initialization code ...
+});
+
 
 
