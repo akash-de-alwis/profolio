@@ -405,6 +405,35 @@ input {
     border: 1px solid var(--border-color);
     padding: 2.5rem 1.25rem 1.875rem;
     text-align: center;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInService 0.5s ease forwards;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Add delay for each service item */
+.services__item:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.services__item:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+.services__item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+@keyframes fadeInService {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .icon__box {
@@ -477,10 +506,42 @@ input {
     border-left: 2px solid var(--primary-color);
     padding-left: 1.6rem;
     position: relative;
+    opacity: 0;
+    transform: translateX(-20px);
+    animation: slideInResume 0.5s ease forwards;
 }
 
 .resume__item:not(:last-child) {
     padding-bottom: 3rem;
+}
+
+/* Add delay for each subsequent item */
+.resume__item:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.resume__item:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+.resume__item:nth-child(4) {
+    animation-delay: 0.6s;
+}
+
+@keyframes slideInResume {
+    0% {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.resume__item:hover {
+    transform: translateX(5px);
+    transition: transform 0.3s ease;
 }
 
 .resume__item::before {
@@ -492,6 +553,12 @@ input {
     position: absolute;
     left: -0.56rem;
     background-color: var(--bg-color);
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.resume__item:hover::before {
+    transform: scale(1.2);
+    background-color: var(--primary-color);
 }
 
 .resume__subtitle {
