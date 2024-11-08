@@ -1876,56 +1876,5 @@ transition: background-color 0.3s, color 0.3s;
     }
 }
 
-/* Home Socials Animation */
-.home__socials {
-    opacity: 0;
-    animation: fadeInSocials 0.8s ease forwards 1.5s;
-    position: relative;
-}
-
-.home__social-link {
-    opacity: 0;
-    transform: translateX(-20px);
-    animation: slideSocialLinks 0.5s ease forwards;
-}
-
-/* Sequential delays for social links */
-.home__social-link:nth-child(1) { animation-delay: 1.6s; }
-.home__social-link:nth-child(2) { animation-delay: 1.8s; }
-.home__social-link:nth-child(3) { animation-delay: 2.0s; }
-
-/* Add hover effect */
-.home__social-link {
-    transition: all 0.3s ease;
-}
-
-.home__social-link:hover {
-    transform: translateY(-3px);
-    color: var(--primary-color);
-}
-
-/* Add new keyframes */
-@keyframes fadeInSocials {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes slideSocialLinks {
-    from {
-        opacity: 0;
-        transform: translateX(-20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
 
 

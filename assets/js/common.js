@@ -360,5 +360,73 @@ function animateSocialLinks() {
     });
 }
 
+// Add this function to handle home section animations
+function animateHomeSection() {
+    // Reset and trigger animations for home elements
+    const homeElements = {
+        name: document.querySelector('.home__name'),
+        work: document.querySelector('.home__work'),
+        list: document.querySelector('.home__list'),
+        socialLinks: document.querySelectorAll('.home__social-link')
+    };
+
+    // Reset animations by removing and re-adding animation classes
+    if (homeElements.name) {
+        homeElements.name.style.animation = 'none';
+        homeElements.name.offsetHeight; // Trigger reflow
+        homeElements.name.style.animation = 'fadeInDown 0.8s ease forwards';
+    }
+
+    if (homeElements.work) {
+        homeElements.work.style.animation = 'none';
+        homeElements.work.offsetHeight;
+        homeElements.work.style.animation = 'fadeInStagger 0.8s ease forwards 0.4s';
+    }
+
+    if (homeElements.list) {
+        homeElements.list.style.animation = 'none';
+        homeElements.list.offsetHeight;
+        homeElements.list.style.animation = 'fadeInStagger 0.8s ease forwards 0.6s';
+    }
+
+    // Animate social links with staggered delay
+    homeElements.socialLinks.forEach((link, index) => {
+        link.style.animation = 'none';
+        link.offsetHeight;
+        link.style.animation = `fadeInUp 0.5s ease forwards ${0.9 + (index * 0.2)}s`;
+    });
+}
+
+// Initialize home animations when clicking on Hello nav link
+const helloLink = document.querySelector('a[href="#home"]');
+if (helloLink) {
+    helloLink.addEventListener('click', () => {
+        setTimeout(animateHomeSection, 300); // Delay to ensure smooth transition
+    });
+}
+
+// Also trigger animations when the section becomes visible
+function setupHomeObserver() {
+    const homeSection = document.getElementById('home');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                animateHomeSection();
+                observer.disconnect(); // Only trigger once
+            }
+        });
+    }, { threshold: 0.3 });
+
+    if (homeSection) {
+        observer.observe(homeSection);
+    }
+}
+
+// Add this to your DOMContentLoaded event listener
+document.addEventListener('DOMContentLoaded', () => {
+    setupHomeObserver();
+    // ... your other initialization code ...
+});
+
 
 
