@@ -319,6 +319,28 @@ input {
 .hello__details {
     margin-bottom: 1.67em;
     text-align: justify;
+    animation: fadeIn 1s ease-in;
+    position: relative;
+    padding-left: 1rem;
+    border-left: 3px solid var(--primary-color);
+    transition: all 0.3s ease;
+}
+
+.hello__details:hover {
+    transform: translateX(10px);
+    border-left-width: 5px;
+    padding-left: 1.5rem;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /*========= Buttons =========*/
@@ -482,28 +504,11 @@ input {
 
 .skills__bar {
     background-color: var(--bg-color-alt);
-    overflow: hidden;
 }
 
 .skills__percentage {
     display: block;
     background-color: var(--primary-color);
-    animation: skillsBar 2s cubic-bezier(0.17, 0.67, 0, 1);
-    transform-origin: left;
-}
-
-@keyframes skillsBar {
-    0% {
-        transform: scaleX(0);
-    }
-    100% {
-        transform: scaleX(1);
-    }
-}
-
-.skills__data:hover .skills__percentage {
-    filter: brightness(110%);
-    transition: filter 0.3s ease;
 }
 
 /*========= Projects =========*/
