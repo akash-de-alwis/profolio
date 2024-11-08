@@ -1504,5 +1504,305 @@ transition: background-color 0.3s, color 0.3s;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
+/* Add these styles to your existing CSS file, after the contact form styles */
+
+/* Contact Form Animation */
+.contact__form {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInForm 0.8s ease forwards;
+}
+
+.contact__input-div {
+    opacity: 0;
+    transform: translateX(-20px);
+    animation: slideInInput 0.5s ease forwards;
+}
+
+/* Add sequential delays for each input */
+.contact__input-div:nth-child(1) {
+    animation-delay: 0.2s;
+}
+
+.contact__input-div:nth-child(2) {
+    animation-delay: 0.4s;
+}
+
+.contact__input-div:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+.contact__button {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInButton 0.5s ease forwards;
+    animation-delay: 0.8s;
+}
+
+@keyframes fadeInForm {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInInput {
+    0% {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInButton {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Add hover effects for inputs */
+.contact__input {
+    transition: all 0.3s ease;
+}
+
+.contact__input:hover {
+    transform: translateX(5px);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.contact__input:focus {
+    transform: translateX(5px);
+    border-color: #fff;
+}
+
+/* Add animation for success/error messages */
+.contact__message {
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+}
+
+.contact__message.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Updated Contact Info Styles */
+.contact__list {
+    margin-bottom: 3.25rem;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInContactInfo 0.8s ease forwards;
+}
+
+.contact__list dt {
+    float: left;
+    font-weight: var(--bold);
+    text-transform: uppercase;
+    position: relative;
+    padding-left: 25px;
+    transition: all 0.3s ease;
+}
+
+/* Add icons before each contact detail */
+.contact__list dt::before {
+    font-family: "remixicon";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.1em;
+    opacity: 0.8;
+}
+
+.contact__list dt:nth-child(1)::before {
+    content: "\f0f9";  /* Phone icon */
+}
+
+.contact__list dt:nth-child(3)::before {
+    content: "\ee35";  /* Email icon */
+}
+
+.contact__list dt:nth-child(5)::before {
+    content: "\f059";  /* Twitter/X icon */
+}
+
+.contact__list dd {
+    padding-left: 6.25em;
+    margin-bottom: 0.94em;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+/* Hover effects */
+.contact__list dt:hover,
+.contact__list dd:hover {
+    transform: translateX(10px);
+    text-shadow: 0 0 1px rgba(255, 255, 255, 0.5);
+}
+
+/* Social Links */
+.contact__socials {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInContactInfo 0.8s ease forwards 0.3s;
+}
+
+.contact__socials li {
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+}
+
+.contact__social-link {
+    font-family: var(--roboto-font);
+    position: relative;
+    padding-left: 35px;
+    transition: all 0.3s ease;
+}
+
+/* Add icons before each social link */
+.contact__social-link::before {
+    font-family: "remixicon";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.5em;
+    opacity: 0.8;
+    transition: all 0.3s ease;
+}
+
+
+
+/* Hover effects for social links */
+.contact__socials li:hover {
+    transform: translateX(10px);
+}
+
+.contact__social-link:hover {
+    color: var(--primary-color);
+}
+
+.contact__social-link:hover::before {
+    opacity: 1;
+    transform: translateY(-50%) scale(1.2);
+}
+
+/* Animation keyframes */
+@keyframes fadeInContactInfo {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Add a subtle border between contact info and socials */
+.contact__list::after {
+    content: '';
+    display: block;
+    width: 50px;
+    height: 2px;
+    background: linear-gradient(to right, rgba(255,255,255,0.8), transparent);
+    margin: 2rem 0;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+    .contact__list dt {
+        padding-left: 20px;
+    }
+    
+    .contact__social-link {
+        padding-left: 30px;
+    }
+}
+
+/* Update the contact socials styling */
+.contact__socials {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.contact__social-link {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 0.5rem;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Add hover effect */
+.contact__social-link:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateX(8px);
+}
+
+/* Add icon styling */
+.contact__social-link i {
+    font-size: 1.5rem;
+    margin-right: 1rem;
+    transition: all 0.3s ease;
+}
+
+/* Add different colors for different social platforms */
+.contact__social-link.facebook i {
+    color: #1877f2;
+}
+
+.contact__social-link.instagram i {
+    color: #e4405f;
+}
+
+.contact__social-link.linkedin i {
+    color: #0077b5;
+}
+
+.contact__social-link.github i {
+    color: #fff;
+}
+
+/* Add shine effect on hover */
+.contact__social-link::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        to bottom right,
+        rgba(255, 255, 255, 0.2) 0%,
+        rgba(255, 255, 255, 0.05) 40%,
+        transparent 50%
+    );
+    transform: rotate(45deg);
+    transition: all 0.5s ease;
+}
+
+.contact__social-link:hover::after {
+    transform: rotate(45deg) translate(50%, 50%);
+}
+
 
 

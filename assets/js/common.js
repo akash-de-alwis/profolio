@@ -286,5 +286,60 @@ if (blogLink) {
     });
 }
 
+/*========== Contact Form Animation ==========*/
+function animateContactForm() {
+    const contactForm = document.querySelector('.contact__form');
+    const inputs = document.querySelectorAll('.contact__input-div');
+    const button = document.querySelector('.contact__button');
+    
+    // Reset animations
+    contactForm.style.animation = 'none';
+    inputs.forEach(input => input.style.animation = 'none');
+    button.style.animation = 'none';
+    
+    // Trigger reflow
+    contactForm.offsetHeight;
+    inputs.forEach(input => input.offsetHeight);
+    button.offsetHeight;
+    
+    // Restart animations
+    contactForm.style.animation = 'fadeInForm 0.8s ease forwards';
+    inputs.forEach((input, index) => {
+        input.style.animation = `slideInInput 0.5s ease forwards ${0.2 * (index + 1)}s`;
+    });
+    button.style.animation = 'fadeInButton 0.5s ease forwards 0.8s';
+}
+
+// Initialize contact form animation when clicking on Contact nav link
+const contactLink = document.querySelector('a[href="#contact"]');
+if (contactLink) {
+    contactLink.addEventListener('click', () => {
+        setTimeout(animateContactForm, 300);
+    });
+}
+
+// Add observer for contact section
+function setupContactObserver() {
+    const contactSection = document.getElementById('contact');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                animateContactForm();
+                observer.disconnect(); // Only trigger once
+            }
+        });
+    }, { threshold: 0.3 });
+
+    if (contactSection) {
+        observer.observe(contactSection);
+    }
+}
+
+// Add this to your DOMContentLoaded event listener
+document.addEventListener('DOMContentLoaded', () => {
+    setupContactObserver();
+    // ... your other initialization code ...
+});
+
 
 
