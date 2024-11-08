@@ -199,8 +199,51 @@ function setupResumeObserver() {
     }
 }
 
+/*========== Services Animation ==========*/
+function animateServices() {
+    const serviceItems = document.querySelectorAll('.services__item');
+    
+    // Reset animations
+    serviceItems.forEach(item => {
+        item.style.animation = 'none';
+        item.offsetHeight; // Trigger reflow
+        item.style.animation = 'fadeInService 0.8s ease forwards'; // Increased duration from 0.5s to 0.8s
+    });
+
+    // Add longer sequential delay for each item
+    serviceItems.forEach((item, index) => {
+        item.style.animationDelay = `${index * 0.4}s`; // Increased delay from 0.2s to 0.4s
+    });
+}
+
+// Initialize services animation when clicking on Services nav link
+const servicesLink = document.querySelector('a[href="#services"]');
+if (servicesLink) {
+    servicesLink.addEventListener('click', () => {
+        setTimeout(animateServices, 300); // Increased delay from 100ms to 300ms
+    });
+}
+
+// Add observer for services section
+function setupServicesObserver() {
+    const servicesSection = document.getElementById('services');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                setTimeout(animateServices, 200); // Added delay before animation starts
+                observer.disconnect(); // Only trigger once
+            }
+        });
+    }, { threshold: 0.3 }); // Reduced threshold to trigger animation earlier
+
+    if (servicesSection) {
+        observer.observe(servicesSection);
+    }
+}
+
 // Initialize observers when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
+    setupServicesObserver();
     setupResumeObserver();
     // ... your other initialization code ...
 });
