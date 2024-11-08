@@ -1510,230 +1510,48 @@ transition: background-color 0.3s, color 0.3s;
 .contact__form {
     opacity: 0;
     transform: translateY(20px);
-    animation: fadeInForm 0.8s ease forwards;
+    animation: simpleFormFade 1s ease forwards;
 }
 
 .contact__input-div {
     opacity: 0;
-    transform: translateX(-20px);
-    animation: slideInInput 0.5s ease forwards;
+    animation: simpleInputFade 0.5s ease forwards;
 }
 
-/* Add sequential delays for each input */
+/* Sequential delays for inputs */
 .contact__input-div:nth-child(1) {
-    animation-delay: 0.2s;
+    animation-delay: 0.3s;
 }
 
 .contact__input-div:nth-child(2) {
-    animation-delay: 0.4s;
+    animation-delay: 0.5s;
 }
 
 .contact__input-div:nth-child(3) {
-    animation-delay: 0.6s;
+    animation-delay: 0.7s;
 }
 
 .contact__button {
     opacity: 0;
-    transform: translateY(20px);
-    animation: fadeInButton 0.5s ease forwards;
-    animation-delay: 0.8s;
+    animation: simpleInputFade 0.5s ease forwards;
+    animation-delay: 0.9s;
 }
 
-@keyframes fadeInForm {
-    0% {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    100% {
+/* Simple fade animations */
+@keyframes simpleFormFade {
+    to {
         opacity: 1;
         transform: translateY(0);
     }
 }
 
-@keyframes slideInInput {
-    0% {
-        opacity: 0;
-        transform: translateX(-20px);
-    }
-    100% {
+@keyframes simpleInputFade {
+    to {
         opacity: 1;
-        transform: translateX(0);
     }
 }
 
-@keyframes fadeInButton {
-    0% {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Add hover effects for inputs */
-.contact__input {
-    transition: all 0.3s ease;
-}
-
-.contact__input:hover {
-    transform: translateX(5px);
-    border-color: rgba(255, 255, 255, 0.5);
-}
-
-.contact__input:focus {
-    transform: translateX(5px);
-    border-color: #fff;
-}
-
-/* Add animation for success/error messages */
-.contact__message {
-    opacity: 0;
-    transform: translateY(-10px);
-    transition: all 0.3s ease;
-}
-
-.contact__message.show {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* Updated Contact Info Styles */
-.contact__list {
-    margin-bottom: 3.25rem;
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeInContactInfo 0.8s ease forwards;
-}
-
-.contact__list dt {
-    float: left;
-    font-weight: var(--bold);
-    text-transform: uppercase;
-    position: relative;
-    padding-left: 25px;
-    transition: all 0.3s ease;
-}
-
-/* Add icons before each contact detail */
-.contact__list dt::before {
-    font-family: "remixicon";
-    position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 1.1em;
-    opacity: 0.8;
-}
-
-.contact__list dt:nth-child(1)::before {
-    content: "\f0f9";  /* Phone icon */
-}
-
-.contact__list dt:nth-child(3)::before {
-    content: "\ee35";  /* Email icon */
-}
-
-.contact__list dt:nth-child(5)::before {
-    content: "\f059";  /* Twitter/X icon */
-}
-
-.contact__list dd {
-    padding-left: 6.25em;
-    margin-bottom: 0.94em;
-    position: relative;
-    transition: all 0.3s ease;
-}
-
-/* Hover effects */
-.contact__list dt:hover,
-.contact__list dd:hover {
-    transform: translateX(10px);
-    text-shadow: 0 0 1px rgba(255, 255, 255, 0.5);
-}
-
-/* Social Links */
-.contact__socials {
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeInContactInfo 0.8s ease forwards 0.3s;
-}
-
-.contact__socials li {
-    margin-bottom: 1rem;
-    transition: all 0.3s ease;
-}
-
-.contact__social-link {
-    font-family: var(--roboto-font);
-    position: relative;
-    padding-left: 35px;
-    transition: all 0.3s ease;
-}
-
-/* Add icons before each social link */
-.contact__social-link::before {
-    font-family: "remixicon";
-    position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 1.5em;
-    opacity: 0.8;
-    transition: all 0.3s ease;
-}
-
-
-
-/* Hover effects for social links */
-.contact__socials li:hover {
-    transform: translateX(10px);
-}
-
-.contact__social-link:hover {
-    color: var(--primary-color);
-}
-
-.contact__social-link:hover::before {
-    opacity: 1;
-    transform: translateY(-50%) scale(1.2);
-}
-
-/* Animation keyframes */
-@keyframes fadeInContactInfo {
-    0% {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Add a subtle border between contact info and socials */
-.contact__list::after {
-    content: '';
-    display: block;
-    width: 50px;
-    height: 2px;
-    background: linear-gradient(to right, rgba(255,255,255,0.8), transparent);
-    margin: 2rem 0;
-}
-
-/* Responsive adjustments */
-@media screen and (max-width: 768px) {
-    .contact__list dt {
-        padding-left: 20px;
-    }
-    
-    .contact__social-link {
-        padding-left: 30px;
-    }
-}
-
-/* Update the contact socials styling */
+/* Simplified Social Links Styling */
 .contact__socials {
     display: flex;
     flex-direction: column;
@@ -1744,64 +1562,164 @@ transition: background-color 0.3s, color 0.3s;
 .contact__social-link {
     display: flex;
     align-items: center;
-    padding: 0.75rem 1rem;
+    padding: 1rem 1.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+/* Icon styling */
+.contact__social-link i {
+    font-size: 1.3rem;
+    margin-right: 1rem;
+    transition: transform 0.3s ease;
+}
+
+/* Platform-specific icon colors */
+.contact__social-link.facebook i { color: #1877f2; }
+.contact__social-link.instagram i { color: #e4405f; }
+.contact__social-link.linkedin i { color: #0077b5; }
+.contact__social-link.github i { color: #fff; }
+
+/* Text styling */
+.contact__social-link {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* Simple hover effect */
+.contact__social-link:hover {
     background: rgba(255, 255, 255, 0.1);
-    border-radius: 0.5rem;
+    transform: translateX(5px);
+}
+
+/* Basic fade-in animation */
+@keyframes simpleFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.contact__social-link {
+    opacity: 0;
+    animation: simpleFadeIn 0.5s ease forwards;
+}
+
+/* Sequential animation delays */
+.contact__socials li:nth-child(1) .contact__social-link { animation-delay: 0.1s; }
+.contact__socials li:nth-child(2) .contact__social-link { animation-delay: 0.2s; }
+.contact__socials li:nth-child(3) .contact__social-link { animation-delay: 0.3s; }
+.contact__socials li:nth-child(4) .contact__social-link { animation-delay: 0.4s; }
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+    .contact__social-link {
+        padding: 0.8rem 1.2rem;
+    }
+    
+    .contact__social-link i {
+        font-size: 1.2rem;
+    }
+}
+
+/* Modern Social Links Styling */
+.contact__socials {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    margin-top: 2rem;
+}
+
+.contact__social-link {
+    display: flex;
+    align-items: center;
+    padding: 0.8rem 1.2rem;
+    background: rgba(255, 255, 255, 0.03);
+    border-left: 3px solid transparent;
+    border-radius: 0 8px 8px 0;
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
+    backdrop-filter: blur(4px);
 }
 
-/* Add hover effect */
-.contact__social-link:hover {
-    background: rgba(255, 255, 255, 0.2);
-    transform: translateX(8px);
+/* Platform-specific styling */
+.contact__social-link.facebook {
+    border-left-color: #1877f2;
 }
 
-/* Add icon styling */
+.contact__social-link.instagram {
+    border-left-color: #e4405f;
+}
+
+.contact__social-link.linkedin {
+    border-left-color: #0077b5;
+}
+
+.contact__social-link.github {
+    border-left-color: #fff;
+}
+
+/* Icon styling */
 .contact__social-link i {
-    font-size: 1.5rem;
-    margin-right: 1rem;
+    font-size: 1.2rem;
+    width: 2rem;
+    color: rgba(255, 255, 255, 0.9);
     transition: all 0.3s ease;
 }
 
-/* Add different colors for different social platforms */
-.contact__social-link.facebook i {
-    color: #1877f2;
+/* Text styling */
+.contact__social-link {
+    font-size: 0.95rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    color: rgba(255, 255, 255, 0.8);
 }
 
-.contact__social-link.instagram i {
-    color: #e4405f;
+/* Hover effects */
+.contact__social-link:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateX(6px);
 }
 
-.contact__social-link.linkedin i {
-    color: #0077b5;
+.contact__social-link:hover i {
+    transform: scale(1.1);
 }
 
-.contact__social-link.github i {
-    color: #fff;
+/* Simple slide-in animation */
+.contact__social-link {
+    opacity: 0;
+    transform: translateX(-10px);
+    animation: slideIn 0.5s ease forwards;
 }
 
-/* Add shine effect on hover */
-.contact__social-link::after {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: linear-gradient(
-        to bottom right,
-        rgba(255, 255, 255, 0.2) 0%,
-        rgba(255, 255, 255, 0.05) 40%,
-        transparent 50%
-    );
-    transform: rotate(45deg);
-    transition: all 0.5s ease;
+.contact__socials li:nth-child(1) .contact__social-link { animation-delay: 0.1s; }
+.contact__socials li:nth-child(2) .contact__social-link { animation-delay: 0.2s; }
+.contact__socials li:nth-child(3) .contact__social-link { animation-delay: 0.3s; }
+.contact__socials li:nth-child(4) .contact__social-link { animation-delay: 0.4s; }
+
+@keyframes slideIn {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
-.contact__social-link:hover::after {
-    transform: rotate(45deg) translate(50%, 50%);
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+    .contact__social-link {
+        padding: 0.7rem 1rem;
+    }
+    
+    .contact__social-link i {
+        font-size: 1.1rem;
+    }
 }
 
 

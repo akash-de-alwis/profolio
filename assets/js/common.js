@@ -289,32 +289,39 @@ if (blogLink) {
 /*========== Contact Form Animation ==========*/
 function animateContactForm() {
     const contactForm = document.querySelector('.contact__form');
-    const inputs = document.querySelectorAll('.contact__input-div');
-    const button = document.querySelector('.contact__button');
-    
-    // Reset animations
-    contactForm.style.animation = 'none';
-    inputs.forEach(input => input.style.animation = 'none');
-    button.style.animation = 'none';
-    
-    // Trigger reflow
-    contactForm.offsetHeight;
-    inputs.forEach(input => input.offsetHeight);
-    button.offsetHeight;
-    
-    // Restart animations
-    contactForm.style.animation = 'fadeInForm 0.8s ease forwards';
-    inputs.forEach((input, index) => {
-        input.style.animation = `slideInInput 0.5s ease forwards ${0.2 * (index + 1)}s`;
-    });
-    button.style.animation = 'fadeInButton 0.5s ease forwards 0.8s';
+    if (contactForm) {
+        contactForm.style.animation = 'none';
+        contactForm.offsetHeight; // Trigger reflow
+        contactForm.style.animation = 'simpleFormFade 1s ease forwards';
+    }
 }
 
 // Initialize contact form animation when clicking on Contact nav link
 const contactLink = document.querySelector('a[href="#contact"]');
 if (contactLink) {
     contactLink.addEventListener('click', () => {
-        setTimeout(animateContactForm, 300);
+        // Wait for the scroll animation to complete
+        setTimeout(() => {
+            // Reset and trigger all contact section animations
+            animateContactForm();
+            animateSocialLinks();
+            
+            // Reset form animations
+            const contactInputs = document.querySelectorAll('.contact__input-div');
+            contactInputs.forEach((input, index) => {
+                input.style.animation = 'none';
+                input.offsetHeight; // Trigger reflow
+                input.style.animation = `simpleInputFade 0.5s ease forwards ${index * 0.2 + 0.3}s`;
+            });
+
+            // Reset button animation
+            const contactButton = document.querySelector('.contact__button');
+            if (contactButton) {
+                contactButton.style.animation = 'none';
+                contactButton.offsetHeight;
+                contactButton.style.animation = 'simpleInputFade 0.5s ease forwards 0.9s';
+            }
+        }, 300); // Adjust timing if needed
     });
 }
 
@@ -325,6 +332,7 @@ function setupContactObserver() {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 animateContactForm();
+                animateSocialLinks();
                 observer.disconnect(); // Only trigger once
             }
         });
@@ -340,6 +348,17 @@ document.addEventListener('DOMContentLoaded', () => {
     setupContactObserver();
     // ... your other initialization code ...
 });
+
+// Update the animateSocialLinks function
+function animateSocialLinks() {
+    const socialLinks = document.querySelectorAll('.contact__social-link');
+    
+    socialLinks.forEach((link, index) => {
+        link.style.animation = 'none';
+        link.offsetHeight; // Trigger reflow
+        link.style.animation = `slideIn 0.5s ease forwards ${index * 0.1}s`;
+    });
+}
 
 
 
