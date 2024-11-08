@@ -1259,13 +1259,14 @@ transition: background-color 0.3s, color 0.3s;
 }
 
 
+ /* new once */
 .project__categorise {
     display: flex;
     flex-wrap: wrap;
     column-gap: 3rem;
     row-gap: 0.25rem;
     margin-bottom: 1.875rem;
-    -webkit-overflow-scrolling: touch; /* Add iOS momentum scrolling */
+    -webkit-overflow-scrolling: touch;
     -webkit-tap-highlight-color: transparent; /* Remove tap highlight on iOS */
 }
 
@@ -1282,7 +1283,35 @@ transition: background-color 0.3s, color 0.3s;
 }
 
 
+.project__container {
+    row-gap: 2.5rem;
+    -webkit-overflow-scrolling: touch; /* Enable smooth scrolling on iOS */
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+}
 
-  
+.project__item {
+    margin: 20px;
+    -webkit-tap-highlight-color: transparent; /* Remove tap highlight on iOS */
+    touch-action: manipulation; /* Optimize touch interactions */
+}
+
+.project__item {
+    grid-template-columns: 5fr 7fr;
+    -webkit-transform: translateZ(0); /* Enable hardware acceleration */
+    transform: translateZ(0);
+}
+
+.project__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    -webkit-user-drag: none; /* Prevent image dragging on iOS */
+}
+
+.project__data {
+    padding: 3rem 3rem 2.5rem 1.875rem;
+    border: 1px solid var(--border-color);
+    -webkit-overflow-scrolling: touch; /* Enable smooth scrolling for content */
+}
 
 
