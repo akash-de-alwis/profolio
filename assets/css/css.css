@@ -1259,78 +1259,29 @@ transition: background-color 0.3s, color 0.3s;
 }
 
 
-/* ... existing code ... */
-
-/* iOS Compatibility Fixes */
-* {
-    -webkit-tap-highlight-color: transparent;
-    -webkit-touch-callout: none;
+.project__categorise {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 3rem;
+    row-gap: 0.25rem;
+    margin-bottom: 1.875rem;
+    -webkit-overflow-scrolling: touch; /* Add iOS momentum scrolling */
+    -webkit-tap-highlight-color: transparent; /* Remove tap highlight on iOS */
 }
 
-/* Fix for iOS input styling */
-input,
-textarea {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    border-radius: 0;
-}
-
-/* Fix for iOS momentum scrolling */
-.nav__menu,
-body {
-    -webkit-overflow-scrolling: touch;
-}
-
-/* Fix for iOS button styling */
-.button,
-.project__link,
-.notice-button,
-.contact__button {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-}
-
-/* Fix for iOS font rendering */
-body {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-
-/* Fix for iOS sticky header */
-.scroll-header {
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
-}
-
-/* Fix for iOS form elements */
-select {
-    background-color: transparent;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-}
-
-/* Fix for iOS click events */
-.nav__link,
-.button,
-.project__link,
-.contact__button {
+.category__btn {
+    color: var(--text-color-alt);
+    font-weight: var(--bold);
+    font-family: var(--mono-font);
+    position: relative;
+    padding: 0.5rem 0; /* Add padding for better touch target */
     cursor: pointer;
-    touch-action: manipulation;
+    -webkit-touch-callout: none; /* Prevent callout on long press */
+    -webkit-user-select: none; /* Prevent text selection */
+    user-select: none;
 }
 
-/* Fix for iOS scroll behavior */
-@supports (-webkit-touch-callout: none) {
-    html {
-        scroll-behavior: auto;
-    }
-}
 
-/* ... rest of existing code ... */
-  
-  
 
   
 
