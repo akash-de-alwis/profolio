@@ -536,24 +536,25 @@ input {
 
 .project__container {
     row-gap: 2.5rem;
-    padding: 0 10px;
 }
 
 .project__item {
-    grid-template-columns: 5fr 7fr;
-    -webkit-overflow-scrolling: touch;
-    width: 100%;
+    grid-template-columns: 1fr;
+    gap: 1rem;
 }
 
 .project__img {
     width: 100%;
-    height: 100%;
+    height: auto;
+    max-height: 300px;
     object-fit: cover;
+    border-radius: 0.3rem;
 }
 
 .project__data {
-    padding: 3rem 3rem 2.5rem 1.875rem;
-    border: 1px solid var(--border-color);
+    padding: 1.5rem;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .project__title {
@@ -1152,22 +1153,6 @@ figcaption {
     .blog__details {
         padding: 2.5rem 1.875rem;
     }
-
-    .project__item {
-        grid-template-columns: 1fr;
-        margin: 10px 0;
-    }
-
-    .project__data {
-        padding: 1.5rem;
-    }
-
-    .project__img {
-        width: 100%;
-        height: auto;
-        -webkit-transform: translateZ(0);
-        transform: translateZ(0);
-    }
 }
 
 @media screen and (max-width:576px) {
@@ -1271,6 +1256,31 @@ transition: background-color 0.3s, color 0.3s;
 .notice-button:hover {
     background-color: var(--primary-color);  
     color: #fff;
+}
+
+/* Update media queries */
+@media screen and (min-width: 768px) {
+    .project__item {
+        grid-template-columns: 5fr 7fr;
+    }
+    
+    .project__img {
+        height: 100%;
+        max-height: none;
+    }
+}
+
+/* Add specific iOS fixes */
+@supports (-webkit-touch-callout: none) {
+    .project__img {
+        height: 250px;
+        width: 100%;
+        object-fit: cover;
+    }
+    
+    .project__data {
+        -webkit-overflow-scrolling: touch;
+    }
 }
 
 
