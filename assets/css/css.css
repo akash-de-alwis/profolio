@@ -538,31 +538,43 @@ input {
     row-gap: 2.5rem;
     display: flex;
     flex-direction: column;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
 }
 
 .project__item {
+    margin: 20px;
     display: grid;
     grid-template-columns: 5fr 7fr;
-    margin: 20px 0;
-    -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.14);
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.14);
+    background: #fff; /* Ensure solid background */
+    -webkit-transform: translateZ(0); /* Prevent iOS rendering issues */
+    transform: translateZ(0);
+    will-change: transform; /* Optimize animations */
 }
 
 .project__img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    -webkit-object-fit: cover;
+    -webkit-backface-visibility: hidden; /* Prevent image flickering */
+    backface-visibility: hidden;
 }
 
 .project__data {
     padding: 3rem 3rem 2.5rem 1.875rem;
     border: 1px solid var(--border-color);
-    -webkit-box-flex: 1;
-    -ms-flex: 1;
-    flex: 1;
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling for content */
+}
+
+/* Add iOS-specific media query */
+@supports (-webkit-touch-callout: none) {
+    .project__container {
+        gap: 2.5rem; /* Fallback for iOS */
+    }
+    
+    .project__item {
+        margin: 0 auto 20px auto; /* Better margin handling for iOS */
+        width: calc(100% - 40px); /* Account for margins */
+    }
 }
 
 .project__title {
