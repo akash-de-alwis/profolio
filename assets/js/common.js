@@ -241,12 +241,50 @@ function setupServicesObserver() {
     }
 }
 
-// Initialize observers when DOM is loaded
+/*========== Blog Posts Animation ==========*/
+function animatePosts() {
+    const postContents = document.querySelectorAll('.post__content');
+    const postImages = document.querySelectorAll('.post__img');
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                // Add delay based on element index
+                setTimeout(() => {
+                    entry.target.classList.add('animate');
+                }, index * 200); // 200ms delay between each animation
+            }
+        });
+    }, { threshold: 0.2 });
+
+    // Observe both content and images
+    postContents.forEach(post => observer.observe(post));
+    postImages.forEach(img => observer.observe(img));
+}
+
+// Initialize post animations when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
+    animatePosts();
     setupServicesObserver();
     setupResumeObserver();
     // ... your other initialization code ...
 });
+
+// Reinitialize post animations when clicking on Blog nav link
+const blogLink = document.querySelector('a[href="#blog"]');
+if (blogLink) {
+    blogLink.addEventListener('click', () => {
+        // Reset animations for both content and images
+        const postContents = document.querySelectorAll('.post__content');
+        const postImages = document.querySelectorAll('.post__img');
+        
+        postContents.forEach(post => post.classList.remove('animate'));
+        postImages.forEach(img => img.classList.remove('animate'));
+        
+        // Trigger animations again after a short delay
+        setTimeout(animatePosts, 300);
+    });
+}
 
 
 
