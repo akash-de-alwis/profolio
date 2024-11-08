@@ -120,5 +120,42 @@ function setActiveStyle(color){
     });
 }
 
+/*========== Skills Animation ==========*/
+function animateSkills() {
+    const skillsSection = document.getElementById('skills');
+    const skillBars = document.querySelectorAll('.skills__percentage');
+    
+    // Create an Intersection Observer
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // Add animation class to all skill bars
+                skillBars.forEach(bar => {
+                    bar.style.animation = 'none'; // Reset animation
+                    bar.offsetHeight; // Trigger reflow
+                    bar.style.animation = 'skillsBar 2s cubic-bezier(0.17, 0.67, 0, 1)';
+                });
+                
+                // Disconnect observer after animation is triggered
+                observer.disconnect();
+            }
+        });
+    }, { threshold: 0.5 }); // Trigger when 50% of the section is visible
+
+    // Start observing the skills section
+    observer.observe(skillsSection);
+}
+
+// Initialize skills animation
+document.addEventListener('DOMContentLoaded', animateSkills);
+
+// Reinitialize skills animation when clicking on Portfolio nav link
+const portfolioLink = document.querySelector('a[href="#skills"]');
+if (portfolioLink) {
+    portfolioLink.addEventListener('click', () => {
+        setTimeout(animateSkills, 100); // Small delay to ensure smooth transition
+    });
+}
+
 
 
