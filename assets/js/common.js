@@ -182,23 +182,6 @@ if (resumeLink) {
     });
 }
 
-// Also trigger animation when the section becomes visible
-function setupResumeObserver() {
-    const resumeSection = document.getElementById('resume');
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                animateResume();
-                observer.disconnect(); // Only trigger once
-            }
-        });
-    }, { threshold: 0.5 });
-
-    if (resumeSection) {
-        observer.observe(resumeSection);
-    }
-}
-
 /*========== Services Animation ==========*/
 function animateServices() {
     const serviceItems = document.querySelectorAll('.services__item');
@@ -222,23 +205,6 @@ if (servicesLink) {
     servicesLink.addEventListener('click', () => {
         setTimeout(animateServices, 300); // Increased delay from 100ms to 300ms
     });
-}
-
-// Add observer for services section
-function setupServicesObserver() {
-    const servicesSection = document.getElementById('services');
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                setTimeout(animateServices, 200); // Added delay before animation starts
-                observer.disconnect(); // Only trigger once
-            }
-        });
-    }, { threshold: 0.3 }); // Reduced threshold to trigger animation earlier
-
-    if (servicesSection) {
-        observer.observe(servicesSection);
-    }
 }
 
 /*========== Blog Posts Animation ==========*/
@@ -427,6 +393,58 @@ function setupHomeObserver() {
 document.addEventListener('DOMContentLoaded', () => {
     setupHomeObserver();
     // ... your other initialization code ...
+});
+
+// Create a reusable function to set up section observers
+function setupSectionObserver(sectionId, animationCallback, threshold = 0.3) {
+    const section = document.getElementById(sectionId);
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                animationCallback();
+                observer.disconnect(); // Only trigger once
+            }
+        });
+    }, { threshold });
+
+    if (section) {
+        observer.observe(section);
+    }
+}
+
+// Initialize all section observers when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    // Set up observers for each section
+    setupSectionObserver('home', animateHomeSection);
+    setupSectionObserver('skills', animateSkills);
+    setupSectionObserver('services', animateServices);
+    setupSectionObserver('resume', animateResume);
+    setupSectionObserver('blog', animatePosts);
+    setupSectionObserver('contact', () => {
+        animateContactForm();
+        animateSocialLinks();
+    });
+
+    // Add scroll event listener to reset observers when reaching top
+    let lastScrollTop = 0;
+    window.addEventListener('scroll', () => {
+        const st = window.pageYOffset || document.documentElement.scrollTop;
+        if (st < lastScrollTop) { // Scrolling up
+            // Reinitialize observers when scrolling to top
+            if (st < 100) {
+                setupSectionObserver('home', animateHomeSection);
+                setupSectionObserver('skills', animateSkills);
+                setupSectionObserver('services', animateServices);
+                setupSectionObserver('resume', animateResume);
+                setupSectionObserver('blog', animatePosts);
+                setupSectionObserver('contact', () => {
+                    animateContactForm();
+                    animateSocialLinks();
+                });
+            }
+        }
+        lastScrollTop = st <= 0 ? 0 : st;
+    });
 });
 
 
