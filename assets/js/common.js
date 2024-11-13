@@ -6,26 +6,25 @@ navClose = document.getElementById('nav-close');
 /*========== Menu show ==========*/
 /* validate if constant exists*/
 if(navToggle) {
-    navToggle.addEventListener('click',() => {
+    navToggle.addEventListener('click', () => {
         navMenu.classList.add('show-menu');
-    })
+        document.body.style.overflow = 'hidden'; // Prevent background scrolling
+    });
 }
 
 /*========== Hide show ==========*/
 /* validate if constant exists*/
 if(navClose) {
-    navClose.addEventListener('click',() => {
-        navMenu.classList.remove('show-menu');
+    navClose.addEventListener('click', () => {
+        closeMenu();
     });
 }
 
 /*==========  Remove Menu Moblie ==========*/
 const navLink = document.querySelectorAll('.nav__link');
 
-function linkAction () {
-    const navMenu = document.getElementById('nav-menu');
-    //when click on each link,remove the show-menu class
-    navMenu.classList.remove('show-menu');
+function linkAction() {
+    closeMenu();
 }
 
 navLink.forEach((n) => n.addEventListener('click', linkAction));
@@ -446,6 +445,20 @@ document.addEventListener('DOMContentLoaded', () => {
         lastScrollTop = st <= 0 ? 0 : st;
     });
 });
+
+// Add click event for overlay
+const navOverlay = document.querySelector('.nav__overlay');
+if(navOverlay) {
+    navOverlay.addEventListener('click', () => {
+        closeMenu();
+    });
+}
+
+// Close menu function
+function closeMenu() {
+    navMenu.classList.remove('show-menu');
+    document.body.style.overflow = ''; // Restore scrolling
+}
 
 
 
