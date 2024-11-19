@@ -46,46 +46,113 @@ contactEmail = document.getElementById('conatct-email'),
 Message = document.getElementById('message'),
 contactMessage = document.getElementById('contact-message');
 
+// Add this function at the top of your file
+function showToast(message, type = 'success') {
+    // Remove existing toast if any
+    const existingToasts = document.querySelectorAll('.toast');
+    existingToasts.forEach(toast => {
+        toast.remove();
+    });
+
+    // Create toast elements
+    const toast = document.createElement('div');
+    toast.className = `toast toast--${type}`;
+
+    // Modern icons with more detailed SVGs
+    const successIcon = `
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/>
+            <path d="M7.5 12.5l3 3 6-6"/>
+        </svg>`;
+    
+    const errorIcon = `
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M15 9l-6 6"/>
+            <path d="M9 9l6 6"/>
+        </svg>`;
+
+    // Get appropriate title based on type
+    const title = type === 'success' ? 'Success' : 'Error';
+
+    toast.innerHTML = `
+        <span class="toast__icon">
+            ${type === 'success' ? successIcon : errorIcon}
+        </span>
+        <div class="toast__content">
+            <div class="toast__title">${title}</div>
+            <div class="toast__message">${message}</div>
+        </div>
+        <div class="toast__progress">
+            <div class="toast__progress-bar"></div>
+        </div>
+    `;
+
+    // Add toast to document
+    document.body.appendChild(toast);
+
+    // Remove toast after animation
+    setTimeout(() => {
+        toast.style.animation = 'toastFadeOut 0.3s cubic-bezier(0.4, 0, 1, 1) forwards';
+        setTimeout(() => {
+            toast.remove();
+        }, 300);
+    }, 3000);
+}
+
+// Update sendEmail function with more modern error handling
 const sendEmail = (e) => {
     e.preventDefault();
 
-    //check if the feild has a value
-    if(contactName.value === '' || contactEmail.value === '' || Message.value === '' ){
-        //add and remove color
-        contactMessage.classList.remove('color-light');
-        contactMessage.classList.add('color-dark');
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    
+    // Form validation
+    if(contactName.value === '' || contactEmail.value === '' || Message.value === '') {
+        showToast('Please complete all required fields', 'error');
+        return;
+    }
+    
+    if (!emailRegex.test(contactEmail.value)) {
+        showToast('Please enter a valid email address', 'error');
+        return;
+    }
 
-        //show message
-        contactMessage.textContent = 'fill all the input fields';
-    } else {
-        //serviceID - templateID - #form - publickey
-        emailjs.sendForm(
-            'service_fev76ec',
-            'template_xkgbdth',
-            '#contact-form',
-            'C5d_NhrPTY9qF3K2e'
-        )
-        .then(() => {
-            //show message and add color,window + dot to open emoji
-            contactMessage.classList.add('color-light');
-            contactMessage.textContent = 'Message sent ';
+    // Show loading state
+    const submitButton = contactForm.querySelector('button[type="submit"]');
+    const originalButtonText = submitButton.innerHTML;
+    submitButton.disabled = true;
+    submitButton.innerHTML = `
+        <svg class="loading-spinner" viewBox="0 0 50 50">
+            <circle cx="25" cy="25" r="20" fill="none" stroke="currentColor" stroke-width="5"></circle>
+        </svg>
+        Sending...
+    `;
 
-            //remove message after 5 seconds
-            setTimeout(() =>{
-                contactMessage.textContent = '';
-            },5000);
-        }, 
-        (error) => {
-            alert('oops! Somthing went wrong...!',error);
-        }
-        );
-
-        //clear input fields
+    // Send email
+    emailjs.sendForm(
+        'service_fev76ec',
+        'template_xkgbdth',
+        '#contact-form',
+        'C5d_NhrPTY9qF3K2e'
+    )
+    .then(() => {
+        showToast('Your message has been sent successfully!', 'success');
+        
+        // Clear form
         contactName.value = '';
         contactEmail.value = '';
         Message.value = '';
-
-    }
+    })
+    .catch((error) => {
+        showToast('Unable to send message. Please try again.', 'error');
+        console.error('Email error:', error);
+    })
+    .finally(() => {
+        // Restore button state
+        submitButton.disabled = false;
+        submitButton.innerHTML = originalButtonText;
+    });
 };
 
 contactForm.addEventListener('submit',sendEmail);
@@ -459,6 +526,30 @@ function closeMenu() {
     navMenu.classList.remove('show-menu');
     document.body.style.overflow = ''; // Restore scrolling
 }
+
+// Add this CSS for the loading spinner
+const style = document.createElement('style');
+style.textContent = `
+    .loading-spinner {
+        animation: spin 1s linear infinite;
+        width: 20px;
+        height: 20px;
+        margin-right: 8px;
+    }
+
+    .loading-spinner circle {
+        stroke-dasharray: 80;
+        stroke-dashoffset: 60;
+        transform-origin: center;
+    }
+
+    @keyframes spin {
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+`;
+document.head.appendChild(style);
 
 
 

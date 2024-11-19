@@ -2131,5 +2131,138 @@ transition: background-color 0.3s, color 0.3s;
     }
 }
 
+/*========== Toast Notifications ==========*/
+.toast {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    padding: 16px;
+    border-radius: 16px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 300px;
+    max-width: 380px;
+    backdrop-filter: blur(8px);
+    transform-origin: bottom;
+    box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.1),
+        0 5px 15px rgba(0, 0, 0, 0.05);
+    animation: toastSlideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.toast--success {
+    background: linear-gradient(
+        135deg,
+        rgba(56, 230, 146, 0.95),
+        rgba(26, 188, 156, 0.95)
+    );
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.toast--error {
+    background: linear-gradient(
+        135deg,
+        rgba(255, 88, 88, 0.95),
+        rgba(240, 62, 62, 0.95)
+    );
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.toast__content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.toast__title {
+    color: #fff;
+    font-size: var(--fs-sm);
+    font-weight: 600;
+    letter-spacing: 0.2px;
+}
+
+.toast__message {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.875rem;
+    line-height: 1.4;
+    font-weight: 400;
+}
+
+.toast__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+}
+
+.toast__icon svg {
+    width: 100%;
+    height: 100%;
+    color: #fff;
+}
+
+.toast__progress {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 4px;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 0 0 16px 16px;
+    overflow: hidden;
+}
+
+.toast__progress-bar {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.3);
+    animation: progress 3s linear forwards;
+}
+
+@keyframes toastSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes progress {
+    from {
+        width: 100%;
+    }
+    to {
+        width: 0%;
+    }
+}
+
+/* Stacked toasts */
+.toast + .toast {
+    margin-bottom: 16px;
+}
+
+/* Media query for mobile devices */
+@media screen and (max-width: 768px) {
+    .toast {
+        left: 16px;
+        right: 16px;
+        bottom: 16px;
+        min-width: auto;
+        max-width: none;
+    }
+}
+
+
 
 
