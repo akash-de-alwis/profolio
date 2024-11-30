@@ -551,5 +551,37 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
+// Update the initialization function
+function initializeProjectsDropdown() {
+    const dropdownHeader = document.querySelector('.dropdown-header');
+    const dropdownContent = document.querySelector('.dropdown-content');
+    
+    if (dropdownHeader && dropdownContent) {
+        // Add initial pulse animation
+        dropdownHeader.style.animation = 'pulse 2s ease-in-out';
+        
+        dropdownHeader.addEventListener('click', () => {
+            dropdownContent.classList.toggle('show');
+            dropdownHeader.classList.toggle('active');
+            
+            // Remove pulse animation after first click
+            dropdownHeader.style.animation = 'none';
+        });
+        
+        // Add hover sound effect (optional)
+        dropdownHeader.addEventListener('mouseenter', () => {
+            const hoverSound = new Audio('path/to/hover-sound.mp3'); // Add your sound file
+            hoverSound.volume = 0.2;
+            hoverSound.play().catch(() => {}); // Catch and ignore autoplay restrictions
+        });
+    }
+}
+
+// Add to your DOMContentLoaded event listener
+document.addEventListener('DOMContentLoaded', () => {
+    initializeProjectsDropdown();
+    // ... your other initialization code ...
+});
+
 
 

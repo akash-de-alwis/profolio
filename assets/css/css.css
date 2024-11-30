@@ -2263,6 +2263,57 @@ transition: background-color 0.3s, color 0.3s;
     }
 }
 
+/* Add these styles */
+.projects-dropdown {
+    width: 100%;
+    margin-bottom: 2rem;
+}
+
+.dropdown-header {
+    background: var(--bg-color);
+    padding: 1rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.dropdown-header:hover {
+    background: var(--bg-color-alt);
+}
+
+.dropdown-content {
+    display: none;
+    padding: 1rem 0;
+}
+
+.dropdown-content.show {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+.dropdown-icon {
+    transition: transform 0.3s ease;
+}
+
+.dropdown-header.active .dropdown-icon {
+    transform: rotate(180deg);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 
 
 
