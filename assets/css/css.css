@@ -2564,6 +2564,23 @@ transition: background-color 0.3s, color 0.3s;
     }
 }
 
+/*========== Chatbot Mobile Positioning ==========*/
+@media screen and (max-width: 768px) {
+    #tidio-chat-iframe {
+        right: 10px !important;
+        bottom: 80px !important; /* Increased bottom margin to avoid overlap with bottom nav */
+        z-index: 99999 !important;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    #tidio-chat-iframe {
+        right: 5px !important;
+        bottom: 70px !important;
+        transform: scale(0.9) !important; /* Slightly reduce size on very small screens */
+    }
+}
+
 
 
 
