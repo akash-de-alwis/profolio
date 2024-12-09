@@ -592,22 +592,20 @@ document.addEventListener('click', (e) => {
     }
 });
 
-// Add this to your existing JavaScript
-function updateMobileNav() {
+// Update the navigation update function
+function updateSideNav() {
     const sections = document.querySelectorAll('section[id]');
-    const bottomNavLinks = document.querySelectorAll('.bottom-nav__link');
+    const sideNavLinks = document.querySelectorAll('.side-nav__link');
     
-    // Get current scroll position
     const scrollY = window.pageYOffset;
     
-    // Loop through sections to get current section
     sections.forEach(section => {
         const sectionHeight = section.offsetHeight;
         const sectionTop = section.offsetTop - 100;
         const sectionId = section.getAttribute('id');
         
         if(scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-            bottomNavLinks.forEach(link => {
+            sideNavLinks.forEach(link => {
                 link.classList.remove('active-link');
                 if(link.getAttribute('href').substring(1) === sectionId) {
                     link.classList.add('active-link');
@@ -617,11 +615,11 @@ function updateMobileNav() {
     });
 }
 
-// Add scroll event listener
-window.addEventListener('scroll', updateMobileNav);
+// Update scroll event listener
+window.addEventListener('scroll', updateSideNav);
 
-// Add click handlers for smooth scrolling
-document.querySelectorAll('.bottom-nav__link').forEach(link => {
+// Update click handlers for smooth scrolling
+document.querySelectorAll('.side-nav__link').forEach(link => {
     link.addEventListener('click', function(e) {
         e.preventDefault();
         const targetId = this.getAttribute('href');
@@ -630,11 +628,41 @@ document.querySelectorAll('.bottom-nav__link').forEach(link => {
         });
         
         // Update active state
-        document.querySelectorAll('.bottom-nav__link').forEach(l => {
+        document.querySelectorAll('.side-nav__link').forEach(l => {
             l.classList.remove('active-link');
         });
         this.classList.add('active-link');
     });
+});
+
+// Add this to your existing JavaScript
+document.addEventListener('DOMContentLoaded', function() {
+    const sideNavToggle = document.querySelector('.side-nav-toggle');
+    const sideNav = document.querySelector('.side-nav');
+
+    if (sideNavToggle && sideNav) {
+        sideNavToggle.addEventListener('click', function() {
+            sideNav.classList.toggle('show');
+            sideNavToggle.classList.toggle('active');
+        });
+
+        // Close side nav when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!sideNav.contains(e.target) && !sideNavToggle.contains(e.target)) {
+                sideNav.classList.remove('show');
+                sideNavToggle.classList.remove('active');
+            }
+        });
+
+        // Close side nav when clicking a link
+        const sideNavLinks = document.querySelectorAll('.side-nav__link');
+        sideNavLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                sideNav.classList.remove('show');
+                sideNavToggle.classList.remove('active');
+            });
+        });
+    }
 });
 
 
