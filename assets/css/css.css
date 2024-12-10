@@ -2706,8 +2706,8 @@ transition: background-color 0.3s, color 0.3s;
     .side-nav-toggle {
         display: flex;
         position: fixed;
-        left: 20px;
-        top: 100px; /* Adjust position as needed */
+        right: 20px; /* Changed from left to right */
+        top: 20px; /* Changed to align with header */
         width: 40px;
         height: 40px;
         background: rgba(255, 255, 255, 0.98);
@@ -2720,76 +2720,53 @@ transition: background-color 0.3s, color 0.3s;
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    .side-nav-toggle i {
-        font-size: 1.5rem;
-        color: var(--text-color);
-        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .side-nav-toggle.active i {
-        transform: rotate(180deg);
-    }
-
-    /* Side nav modifications */
+    /* Update side nav position to slide from right */
     .side-nav {
-        position: fixed;
-        left: -150px; /* Start off-screen */
-        opacity: 0;
-        visibility: hidden;
-        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        right: -150px; /* Changed from left to right */
+        left: auto; /* Reset left position */
     }
 
-    /* Show side nav when active */
+    /* Update show position */
     .side-nav.show {
-        left: 20px;
-        opacity: 1;
-        visibility: visible;
+        right: 20px; /* Changed from left to right */
+        left: auto;
     }
-
-    /* Add animation for nav items */
-    .side-nav__item {
-        opacity: 0;
-        transform: translateX(-10px);
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .side-nav.show .side-nav__item {
-        opacity: 1;
-        transform: translateX(0);
-    }
-
-    /* Stagger the animation for each item */
-    .side-nav.show .side-nav__item:nth-child(1) { transition-delay: 0.1s; }
-    .side-nav.show .side-nav__item:nth-child(2) { transition-delay: 0.2s; }
-    .side-nav.show .side-nav__item:nth-child(3) { transition-delay: 0.3s; }
-    .side-nav.show .side-nav__item:nth-child(4) { transition-delay: 0.4s; }
-    .side-nav.show .side-nav__item:nth-child(5) { transition-delay: 0.5s; }
 }
 
-/* Smaller mobile devices */
+/* Adjust for smaller screens */
 @media screen and (max-width: 480px) {
     .side-nav-toggle {
-        left: 12px;
+        right: 12px;
+        top: 15px;
         width: 35px;
         height: 35px;
     }
 
-    .side-nav-toggle i {
-        font-size: 1.3rem;
-    }
-
     .side-nav.show {
-        left: 12px;
+        right: 12px;
     }
 }
 
 /* Very small devices */
 @media screen and (max-width: 360px) {
     .side-nav.show {
-        left: 10px;
+        right: 10px;
     }
 }
 
+/* Add styles for when header is scrolled */
+.scroll-header .side-nav-toggle {
+    top: 15px; /* Adjust when header is scrolled */
+}
+
+/* Ensure toggle button contrasts with dark background on home section */
+.home .side-nav-toggle {
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.home .side-nav-toggle i {
+    color: var(--text-color);
+}
 
 
 
