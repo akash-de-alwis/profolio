@@ -1541,6 +1541,7 @@ figcaption {
     background: var(--bg-color-alt);
 }
 
+/* Notice container Section */
 .notice-container {
     background: #ffffff;
     border: 1px solid var(--border-color);
